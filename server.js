@@ -6,7 +6,7 @@ var methodOverride = require('method-override');
 var mongoose = require("mongoose");
 
 // Set up db
-mongoose.connect();
+mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
