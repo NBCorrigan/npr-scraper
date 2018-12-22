@@ -1,0 +1,59 @@
+{{!-- Nav --}}
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Mongo News Scraper</a>
+        </div>
+        <!-- Collect content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home <span class="sr-only">(current)</span></a></li>
+                <li><a href="/saved">Saved Articles</a></li>
+                <li><a href="/saved/notes">Article Notes</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+{{!-- Main --}}
+<div class="container">
+
+    {{!-- Jumbotron --}}
+    <div class="jumbotron">
+        <h1>Mongo Scraper</h1>
+        <img src="/images/npr.png" alt="NPR News" height="70px">
+        <p><a class="btn btn-info btn-lg" href="/scrape" role="button">Scrape New Articles</a></p>
+    </div>
+
+    {{!-- Panel for each scraped article --}}
+    {{#each articles}}
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title pull-left">{{this.title}}</h3>
+            <form action="/api/article/save/:{{this.id}}?_method=PUT" method="POST">
+                <input type="hidden" name="id" value={{this.id}}>
+                <button class="btn btn-success pull-right" type="submit">Save Article</button>
+             </form> 
+            <div class="clearfix"></div>
+        </div>
+        <div class="panel-body">
+            <p>{{this.blurb}}</p>
+            <p><a href="{{this.link}}" target="blank">Link to Article</a></p>
+        </div>
+    </div>
+    {{/each}}
+
+    {{!-- Panel to display if there are no articles in the database --}}
+    {{#unless articles}}
+        <div class="panel panel-default">
+            <div class="panel-body">No articles have been scraped.</div>
+        </div>
+    {{/unless}}
+
+</div>
