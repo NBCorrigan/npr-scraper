@@ -6,7 +6,7 @@ var methodOverride = require('method-override');
 var mongoose = require("mongoose");
 
 // Set up db
-var databaseUri = "mongodb://localhost/unit18Populater";
+var databaseUri = "mongodb://heroku_wd1hj3sb:q65jlujvmbm5tqd0mpjf3p45t6@ds141924.mlab.com:41924/heroku_wd1hj3sb";
 if (process.env.MONGODB_URI) {
     mongoose.connect(process.env.MONGODB_URI);
 }else{
