@@ -108,8 +108,7 @@ module.exports = function(app) {
         });
     });
 
-
-    // 
+     // 
     function saveArticle(title, link, blurb) {
         return new Promise(function(resolve, reject) {
             Article.find({ "title": title },
